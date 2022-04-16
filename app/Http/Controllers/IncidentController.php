@@ -26,7 +26,7 @@ class IncidentController extends Controller
 
     public function index()
     {
-        $incidents = $this->incident->latest()->paginate(5);
+        $incidents = $this->incident->all();
         return \response($incidents);
     }
 
@@ -79,15 +79,6 @@ class IncidentController extends Controller
             return \response("Incidente com o id: ${id} foi apagado do sistema.");
         } else {
             return \response("Uma falha ocorreu.", 500);
-        }
-    }
-
-    public function search($title)
-    {
-        $incidents = $this->incident->where('title', 'like', '%'.$title.'%')->get();
-
-        if(!empty($incidents)){
-            return \response($incidents);
         }
     }
 }
